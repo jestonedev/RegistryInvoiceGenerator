@@ -1,0 +1,16 @@
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\RegistryInvoiceGenerator.deps.json
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\RegistryInvoiceGenerator.runtimeconfig.json
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\RegistryInvoiceGenerator.runtimeconfig.dev.json
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\RegistryInvoiceGenerator.dll
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.csproj.CoreCompileInputs.cache
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.AssemblyInfoInputs.cache
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.AssemblyInfo.cs
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\RegistryInvoiceGenerator.pdb
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.dll
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.pdb
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\libwkhtmltox.dll
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\InvoiceTemplate.html
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\calc-center.png
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\invoice-title.png
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\qr.png
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.csprojAssemblyReference.cache

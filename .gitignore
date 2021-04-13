@@ -1,0 +1,11 @@
+*.suo
+*.lock
+*.ide
+*.pubxml
+*.user
+*.dll
+*.pdb
+.vs/
+RegistryWeb/bin/
+RegistryWeb/obj/
+RegistryWeb/wwwroot/files/
