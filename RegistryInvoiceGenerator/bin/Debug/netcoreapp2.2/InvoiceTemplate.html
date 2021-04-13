@@ -104,28 +104,28 @@
                 <p>Режим работы: Пн.-Пт. с 9.00-17.00, обед 13.00-14.00, сб.,вс-выходной</p>
                 <p>Расчетный счет 03100643000000013400 ИНН 3803201800 БИК 012520101</p>
                 <p>Отд. Иркутск Банка России//УФК по Ирк.обл.г.Иркутск, к/с 40102810145370000026</p>
-                <p>Адрес: <b>Видимская ул., д.2, кв.2</b></p>
-                <p>Лиц. счет: <b class="account">10169173</b> ЕЛС ГИС ЖКХ:</p>
-                <p>Потребитель: <b>Дюпина Ольга Ивановна</b></p>
+                <p>Адрес: <b>{address}</b></p>
+                <p>Лиц. счет: <b class="account">{account}</b> ЕЛС ГИС ЖКХ:</p>
+                <p>Потребитель: <b>{tenant}</b></p>
                 <table class="money-table">
                     <tr>
-                        <td class="money-header">Недоплата на 31.12.2020г.</td>
-                        <td class="money-td">891,26</td>
+                        <td class="money-header">Недоплата на {prev-date}г.</td>
+                        <td class="money-td">{balance-input}</td>
                     </tr>
                     <tr>
                         <td class="money-header">Начислено</td>
-                        <td class="money-td">445,63</td>
+                        <td class="money-td">{charging}</td>
                     </tr>
                     <tr>
                         <td class="money-header">Оплачено</td>
-                        <td class="money-td">450,00</td>
+                        <td class="money-td">{payed}</td>
                     </tr>
                     <tr>
-                        <td class="money-header"><b>К оплате за январь 2021г.</b></td>
-                        <td class="money-td"><b>886,89</b></td>
+                        <td class="money-header"><b>К оплате за {date}г.</b></td>
+                        <td class="money-td"><b>{balance-output}</b></td>
                     </tr>
                 </table>
-                <p>Площадь общая: <b class="total-area">48,9</b> количество проживающих: <b>3</b> чел.</p>
+                <p>Площадь общая: <b class="total-area">{total-area}</b> количество проживающих: <b>{prescribed}</b> чел.</p>
                 <table class="area-table">
                     <tr>
                         <td class="area-header">Общая площадь ж.п.:</td>
@@ -140,11 +140,11 @@
                         <td>Плата за наем КБК 90111109044041000120</td>
                         <td>кв.м.</td>
                         <td></td>
-                        <td>48,90</td>
-                        <td>7,390</td>
-                        <td>361,37</td>
-                        <td>84,26</td>
-                        <td>445,63</td>
+                        <td>{total-area-2}</td>
+                        <td>{tariff}</td>
+                        <td>{payment}</td>
+                        <td>{recalc}</td>
+                        <td>{charging}</td>
                     </tr>
                     <tr>
                         <td><b>Итого</b></td>
@@ -152,9 +152,9 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><b>361,37</b></td>
-                        <td><b>84,26</b></td>
-                        <td><b>445,63</b></td>
+                        <td><b>{payment}</b></td>
+                        <td><b>{recalc}</b></td>
+                        <td><b>{charging}</b></td>
                     </tr>
                 </table>
             </td>

@@ -14,3 +14,4 @@ D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGener
 D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\invoice-title.png
 D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\qr.png
 D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\obj\Debug\netcoreapp2.2\RegistryInvoiceGenerator.csprojAssemblyReference.cache
+D:\Projects\Visual Studio Projects\RegistryInvoiceGenerator\RegistryInvoiceGenerator\bin\Debug\netcoreapp2.2\RegistryInvoiceGenerator.dll.config

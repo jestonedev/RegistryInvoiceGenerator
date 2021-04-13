@@ -1,6 +1,7 @@
 ﻿using DinkToPdf;
 using QRCoder;
 using System;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 
@@ -8,62 +9,57 @@ namespace RegistryInvoiceGenerator
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            // TODO: передавать информацию для генерации документа через args (включая имя pdf-файла - tmpFileName)
+            // Загружаем параметры
+            var consoleArgsParser = new ConsoleArgsParser();
+            var invoiceInfo = consoleArgsParser.ParseToInvoiceInfo(args);
 
-            var tmpDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tmp");
+            // Инициализируем временную директорию
+            var tmpDirectory = Path.Combine(Path.GetTempPath(), "registry-invoice-generator");
             if (!Directory.Exists(tmpDirectory))
                 Directory.CreateDirectory(tmpDirectory);
-            
-            // Generate qr-code
-            var qrContent = @"ST00011|Name=УФК по Иркутской области (КУМИ г.Братска)|PersonalAcc=03100643000000013400|BankName=Отд. Иркутск Банка России//УФК по Ирк.обл.г.Иркутск|BIC=012520101|CorrespAcc=40102810145370000026|Sum=88689|Purpose=Оплата коммунальных услуг|PayeeINN=3803201800|lastName=Дюпина|firstName=Ольга|middleName=Ивановна|PayerAddress=Видимская ул., д.2, кв.2|PersAcc=10169173|PaymPeriod=январь 2021|ServiceName=2222|category=Коммунальные услуги|";
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrContent, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            var qr = qrCode.GetGraphic(20);
+
+            // Формируем QR-код
             var tmpQrFileName = Guid.NewGuid() + ".bmp";
-            var outQrFile = Path.Combine(tmpDirectory, tmpQrFileName);
-            qr.Save(outQrFile);
+            var tmpQrFileNameFull = Path.Combine(tmpDirectory, tmpQrFileName);
+            var qr = new Qr();
+            if (!qr.QrSave(qr.QrGenerate(qr.GetQrInvoiceContent(invoiceInfo)), tmpQrFileNameFull)) return -1; // Код -1: Ошибка при сохранении qr-кода
 
-            // Copy template files to /tmp with modifications
-            var htmlFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InvoiceTemplate.html");
-            var htmlTmpFileName = Path.Combine(tmpDirectory, Guid.NewGuid() + ".html");
-            var htmlContent = File.ReadAllText(htmlFileName);
+            // Формируем html-извещение
+            var tmpHtmlFileName = Path.Combine(tmpDirectory, Guid.NewGuid() + ".html");
+            var htmlToPdfConverter = new HtmlToPdfConverter();
+            var htmlContent = htmlToPdfConverter.GetHtmlTemplateContent();
+            htmlContent = htmlToPdfConverter.GenerateHtmlContent(htmlContent, invoiceInfo, tmpQrFileName);
 
-            // Change html content
-            htmlContent = htmlContent.Replace("{qr}", tmpQrFileName);
+            var invoiceTitleFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "invoice-title.png");
+            var calcCenterFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "calc-center.png");
+            if (!htmlToPdfConverter.HtmlSave(htmlContent, tmpHtmlFileName, new string[] { invoiceTitleFileName, calcCenterFileName })) return -2; // Код -2: Ошибка сохранения html-файла
 
-            using (var sw = new StreamWriter(htmlTmpFileName))
+            // Конвертируем html в pdf
+            var tmpPdfFileName = Guid.NewGuid() + ".pdf";
+            var tmpPdfFileNameFull = Path.Combine(tmpDirectory, tmpPdfFileName);
+            if (!htmlToPdfConverter.ConvertHtmlToPdf(tmpHtmlFileName, tmpPdfFileNameFull)) return -3; // Код -3: Ошибка конвертации html в pdf
+
+            // Отправляем файл по электронной почте
+            var smtpHost = ConfigurationManager.AppSettings["smtpHost"];
+            var smtpPort = int.Parse(ConfigurationManager.AppSettings["smtpPort"]);
+            var smtpFrom = ConfigurationManager.AppSettings["smtpFrom"];
+            var smtpSender = new SmtpSender(smtpHost, smtpPort, smtpFrom);
+            if (!smtpSender.SendMail(invoiceInfo.Email, "Счет извещение на оплату за наем жилого помещения", "", tmpPdfFileNameFull)) return -4; // Код -4: Ошибка отправки сообщения
+
+            // Удаляем временные файлы
+            try
             {
-                sw.Write(htmlContent);
+                File.Delete(tmpQrFileNameFull);
+                File.Delete(tmpHtmlFileName);
+                File.Delete(tmpPdfFileNameFull);
+            } catch
+            {
+                return -5; // Код -5: Ошибка удаления временных файлов
             }
-            File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "invoice-title.png"), Path.Combine(tmpDirectory, "invoice-title.png"), true);
-            File.Copy(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "calc-center.png"), Path.Combine(tmpDirectory, "calc-center.png"), true);
 
-            // Convert html to pdf
-            var tmpFileName = Guid.NewGuid() + ".pdf";
-            var outFile = Path.Combine(tmpDirectory, tmpFileName);
-            var converter = new BasicConverter(new PdfTools());
-            var doc = new HtmlToPdfDocument()
-            {
-                GlobalSettings = {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                ImageQuality = 100,
-
-                Out = outFile
-            },
-                Objects = {
-                new ObjectSettings() {
-                        Page = htmlTmpFileName,
-                    }
-                }
-            };
-            converter.Convert(doc);
-
-            File.Delete(tmpQrFileName);
+            return 0;
         }
     }
 }
