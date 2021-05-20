@@ -33,7 +33,8 @@ namespace RegistryInvoiceGenerator
             content = content.Replace("{prescribed}", invoiceInfo.Prescribed.ToString());
             var payment = invoiceInfo.BalanceOutput + invoiceInfo.Payed - invoiceInfo.Recalc - invoiceInfo.BalanceInput;
             content = content.Replace("{payment}", payment.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{tariff}", Math.Round(payment/(decimal)invoiceInfo.TotalArea, 3).ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
+            content = content.Replace("{tariff}", invoiceInfo.TotalArea == 0 ? "0" :
+                Math.Round(payment / (decimal)invoiceInfo.TotalArea, 3).ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
             return content;
         }
 
