@@ -95,6 +95,9 @@ namespace RegistryInvoiceGenerator
                     case "--email":
                         invoiceInfo.Email = argParts[1];
                         break;
+                    case "--move-to-filename":
+                        invoiceInfo.MoveToFileName = argParts[1];
+                        break;
                 }
             }
             return invoiceInfo;

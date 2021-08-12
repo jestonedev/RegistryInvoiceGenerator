@@ -46,8 +46,21 @@ namespace RegistryInvoiceGenerator
             var smtpPort = int.Parse(ConfigurationManager.AppSettings["smtpPort"]);
             var smtpFrom = ConfigurationManager.AppSettings["smtpFrom"];
             var smtpSender = new SmtpSender(smtpHost, smtpPort, smtpFrom);
-            if (!smtpSender.SendMail(invoiceInfo.Email, "Счет извещение на оплату за наем жилого помещения", "", tmpPdfFileNameFull)) return -4; // Код -4: Ошибка отправки сообщения
-
+            if (string.IsNullOrWhiteSpace(invoiceInfo.Email) && string.IsNullOrWhiteSpace(invoiceInfo.MoveToFileName)) return -6; // Не задано целевое назначение квитанции
+            if (!string.IsNullOrWhiteSpace(invoiceInfo.Email))
+                if (!smtpSender.SendMail(invoiceInfo.Email, "Счет извещение на оплату за наем жилого помещения", "", tmpPdfFileNameFull)) return -4; // Код -4: Ошибка отправки сообщения
+            if (!string.IsNullOrWhiteSpace(invoiceInfo.MoveToFileName))
+            {
+                var fileInfo = new FileInfo(invoiceInfo.MoveToFileName);
+                if (!fileInfo.Directory.Exists) return -7; // Некорректно указана директория назначения файла
+                try
+                {
+                    File.Copy(tmpPdfFileNameFull, invoiceInfo.MoveToFileName, true);
+                } catch
+                {
+                    return -8; // Ошибка копирования файла
+                }
+            }
             // Удаляем временные файлы
             try
             {

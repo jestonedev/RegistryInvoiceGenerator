@@ -18,5 +18,6 @@ namespace RegistryInvoiceGenerator
         public float TotalArea { get; set; }
         public int Prescribed { get; set; }
         public string Email { get; set; }
+        public string MoveToFileName { get; set; }
     }
 }
