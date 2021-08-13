@@ -61,8 +61,9 @@ namespace RegistryInvoiceGenerator
                 };
                 converter.Convert(doc);
                 return true;
-            } catch
+            } catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 return false;
             }
         }
