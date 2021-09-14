@@ -19,5 +19,6 @@ namespace RegistryInvoiceGenerator
         public int Prescribed { get; set; }
         public string Email { get; set; }
         public string MoveToFileName { get; set; }
+        public string MessageBody { get; set; }
     }
 }

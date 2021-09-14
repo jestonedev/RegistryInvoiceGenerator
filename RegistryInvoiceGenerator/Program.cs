@@ -48,7 +48,7 @@ namespace RegistryInvoiceGenerator
             var smtpSender = new SmtpSender(smtpHost, smtpPort, smtpFrom);
             if (string.IsNullOrWhiteSpace(invoiceInfo.Email) && string.IsNullOrWhiteSpace(invoiceInfo.MoveToFileName)) return -6; // Не задано целевое назначение квитанции
             if (!string.IsNullOrWhiteSpace(invoiceInfo.Email))
-                if (!smtpSender.SendMail(invoiceInfo.Email, "Счет извещение на оплату за наем жилого помещения", "", tmpPdfFileNameFull)) return -4; // Код -4: Ошибка отправки сообщения
+                if (!smtpSender.SendMail(invoiceInfo.Email, "Счет извещение на оплату за наем жилого помещения", invoiceInfo.MessageBody ?? "", tmpPdfFileNameFull)) return -4; // Код -4: Ошибка отправки сообщения
             if (!string.IsNullOrWhiteSpace(invoiceInfo.MoveToFileName))
             {
                 var fileInfo = new FileInfo(invoiceInfo.MoveToFileName);
