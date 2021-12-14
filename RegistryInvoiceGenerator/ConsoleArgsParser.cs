@@ -44,42 +44,42 @@ namespace RegistryInvoiceGenerator
                         invoiceInfo.OnDate = new DateTime(year, month, day);
                         break;
                     case "--balance-input":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal balanceInput))
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal balanceInput))
                         {
                             balanceInput = 0;
                         }
                         invoiceInfo.BalanceInput = balanceInput;
                         break;
                     case "--charging":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal charging))
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal charging))
                         {
                             charging = 0;
                         }
                         invoiceInfo.Charging = charging;
                         break;
                     case "--payed":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal payed))
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal payed))
                         {
                             payed = 0;
                         }
                         invoiceInfo.Payed = payed;
                         break;
                     case "--recalc":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal recalc))
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal recalc))
                         {
                             recalc = 0;
                         }
                         invoiceInfo.Recalc = recalc;
                         break;
                     case "--balance-output":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal balanceOutput))
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal balanceOutput))
                         {
                             balanceOutput = 0;
                         }
                         invoiceInfo.BalanceOutput = balanceOutput;
                         break;
                     case "--total-area":
-                        if (!float.TryParse(argParts[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out float totalArea))
+                        if (!float.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out float totalArea))
                         {
                             totalArea = 0;
                         }
