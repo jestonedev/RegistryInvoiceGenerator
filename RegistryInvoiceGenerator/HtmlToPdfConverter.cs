@@ -35,6 +35,7 @@ namespace RegistryInvoiceGenerator
             content = content.Replace("{payment}", payment.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
             content = content.Replace("{tariff}", invoiceInfo.TotalArea == 0 ? "0" :
                 Math.Round(payment / (decimal)invoiceInfo.TotalArea, 3).ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
+            content = content.Replace("{total-payment}", (payment + invoiceInfo.Recalc).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
             return content;
         }
 
