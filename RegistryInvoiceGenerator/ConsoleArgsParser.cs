@@ -50,12 +50,19 @@ namespace RegistryInvoiceGenerator
                         }
                         invoiceInfo.BalanceInput = balanceInput;
                         break;
-                    case "--charging":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal charging))
+                    case "--charging-tenancy":
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal chargingTenancy))
                         {
-                            charging = 0;
+                            chargingTenancy = 0;
                         }
-                        invoiceInfo.Charging = charging;
+                        invoiceInfo.ChargingTenancy = chargingTenancy;
+                        break;
+                    case "--charging-penalty":
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal chargingPenalty))
+                        {
+                            chargingTenancy = 0;
+                        }
+                        invoiceInfo.ChargingPenalty = chargingPenalty;
                         break;
                     case "--payed":
                         if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal payed))
@@ -64,12 +71,19 @@ namespace RegistryInvoiceGenerator
                         }
                         invoiceInfo.Payed = payed;
                         break;
-                    case "--recalc":
-                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal recalc))
+                    case "--recalc-tenancy":
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal recalcTenancy))
                         {
-                            recalc = 0;
+                            recalcTenancy = 0;
                         }
-                        invoiceInfo.Recalc = recalc;
+                        invoiceInfo.RecalcTenancy = recalcTenancy;
+                        break;
+                    case "--recalc-penalty":
+                        if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal recalcPenalty))
+                        {
+                            recalcPenalty = 0;
+                        }
+                        invoiceInfo.RecalcPenalty = recalcPenalty;
                         break;
                     case "--balance-output":
                         if (!decimal.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal balanceOutput))
