@@ -12,7 +12,7 @@ namespace RegistryInvoiceGenerator
         public string GetQrInvoiceContent(InvoiceInfo invoiceInfo)
         {
             var snpParts = invoiceInfo.Tenant.Split(" ");
-            return string.Format(@"ST00011|Name=УФК по Иркутской области (КУМИ г.Братска)|PersonalAcc=03100643000000013400|BankName=Отд. Иркутск Банка России//УФК по Ирк.обл.г.Иркутск|BIC=012520101|CorrespAcc=40102810145370000026|Sum={0}|Purpose=Оплата коммунальных услуг|PayeeINN=3803201800|lastName={1}|firstName={2}|middleName={3}|PayerAddress={4}|PersAcc={5}|PaymPeriod={6}|ServiceName=2222|category=Коммунальные услуги|",
+            return string.Format(@"ST00011|Name=УФК по Иркутской области (КУМИ г.Братска)|PersonalAcc=03100643000000013400|KPP=380401001|BankName=Отд. Иркутск Банка России//УФК по Ирк.обл.г.Иркутск|BIC=012520101|CorrespAcc=40102810145370000026|Sum={0}|Purpose=Оплата коммунальных услуг|PayeeINN=3803201800|lastName={1}|firstName={2}|middleName={3}|PayerAddress={4}|PersAcc={5}|PaymPeriod={6}|ServiceName=2222|CBC=90111109044041000120|OKTMO=25714000|category=Коммунальные услуги|",
                 invoiceInfo.BalanceOutput.ToString().Replace(".", "").Replace(",", ""),
                 snpParts.Length > 0 ? snpParts[0]?.Trim() : "",
                 snpParts.Length > 1 ? snpParts[1]?.Trim() : "",

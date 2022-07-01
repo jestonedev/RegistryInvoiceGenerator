@@ -90,7 +90,7 @@ namespace RegistryInvoiceGenerator
                         {
                             balanceOutput = 0;
                         }
-                        invoiceInfo.BalanceOutput = balanceOutput;
+                        invoiceInfo.BalanceOutput = Math.Max(balanceOutput, 0);
                         break;
                     case "--total-area":
                         if (!float.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out float totalArea))
