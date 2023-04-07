@@ -9,36 +9,48 @@ namespace RegistryInvoiceGenerator
 {
     public class HtmlToPdfConverter
     {
-        public string GetHtmlTemplateContent()
+        public string GetHtmlTemplateContent(int invoicePerPageCount)
         {
-            var htmlFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InvoiceTemplate.html");
+            var htmlFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, invoicePerPageCount == 1 ? "InvoiceTemplate1.html" : "InvoiceTemplate2.html");
             return File.ReadAllText(htmlFileName);
         }
 
-        public string GenerateHtmlContent(string content, InvoiceInfo invoiceInfo, string qrFileName)
+        public string GenerateHtmlContent(string content, InvoiceInfo invoiceInfo1, InvoiceInfo invoiceInfo2, string qrFileName1, string qrFileName2)
         {
-            content = content.Replace("{qr}", qrFileName);
-            content = content.Replace("{address}", invoiceInfo.Address);
-            content = content.Replace("{account}", invoiceInfo.Account);
-            content = content.Replace("{tenant}", invoiceInfo.Tenant);
-            content = content.Replace("{prev-date}", new DateTime(invoiceInfo.OnDate.Year, invoiceInfo.OnDate.Month, 1).AddDays(-1).ToString("dd.MM.yyyy"));
-            content = content.Replace("{date}", invoiceInfo.OnDate.ToString("MMMM yyyy", CultureInfo.GetCultureInfo("ru-RU")).ToLower());
-            content = content.Replace("{balance-input}", invoiceInfo.BalanceInput.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{charging}", invoiceInfo.Charging.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{charging-tenancy}", invoiceInfo.ChargingTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{charging-penalty}", invoiceInfo.ChargingPenalty.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{recalc-tenancy}", invoiceInfo.RecalcTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{recalc-penalty}", invoiceInfo.RecalcTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{payed}", invoiceInfo.Payed.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{balance-output}", invoiceInfo.BalanceOutput.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{total-area}", invoiceInfo.TotalArea.ToString("N1", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{total-area-2}", invoiceInfo.TotalArea.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{prescribed}", invoiceInfo.Prescribed.ToString());
-            content = content.Replace("{tariff}", invoiceInfo.TotalArea == 0 ? "0" :
-                Math.Round(invoiceInfo.ChargingTenancy / (decimal)invoiceInfo.TotalArea, 3).ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{total-charging}", (invoiceInfo.ChargingTenancy + invoiceInfo.RecalcTenancy).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{total-penalty}", (invoiceInfo.ChargingPenalty + invoiceInfo.RecalcPenalty).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
-            content = content.Replace("{penalty-display}", (invoiceInfo.ChargingPenalty + invoiceInfo.RecalcPenalty) != 0 ? "table-row" : "none");
+            var info = new Dictionary<string, Tuple<InvoiceInfo, string>> {
+                { "", new Tuple<InvoiceInfo, string>(invoiceInfo1, qrFileName1) }
+            };
+            if (invoiceInfo2 != null)
+            {
+                info.Add("-2", new Tuple<InvoiceInfo, string>(invoiceInfo2, qrFileName2));
+            }
+            foreach (var invoiceInfoPair in info)
+            {
+                var invoiceInfo = invoiceInfoPair.Value.Item1;
+                var qrFileName = invoiceInfoPair.Value.Item2;
+                content = content.Replace("{qr"+invoiceInfoPair.Key+"}", qrFileName);
+                content = content.Replace("{address" + invoiceInfoPair.Key + "}", invoiceInfo.Address);
+                content = content.Replace("{account" + invoiceInfoPair.Key + "}", invoiceInfo.Account);
+                content = content.Replace("{tenant" + invoiceInfoPair.Key + "}", invoiceInfo.Tenant);
+                content = content.Replace("{prev-date" + invoiceInfoPair.Key + "}", new DateTime(invoiceInfo.OnDate.Year, invoiceInfo.OnDate.Month, 1).AddDays(-1).ToString("dd.MM.yyyy"));
+                content = content.Replace("{date" + invoiceInfoPair.Key + "}", invoiceInfo.OnDate.ToString("MMMM yyyy", CultureInfo.GetCultureInfo("ru-RU")).ToLower());
+                content = content.Replace("{balance-input" + invoiceInfoPair.Key + "}", invoiceInfo.BalanceInput.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{charging" + invoiceInfoPair.Key + "}", invoiceInfo.Charging.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{charging-tenancy" + invoiceInfoPair.Key + "}", invoiceInfo.ChargingTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{charging-penalty" + invoiceInfoPair.Key + "}", invoiceInfo.ChargingPenalty.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{recalc-tenancy" + invoiceInfoPair.Key + "}", invoiceInfo.RecalcTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{recalc-penalty" + invoiceInfoPair.Key + "}", invoiceInfo.RecalcTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{payed" + invoiceInfoPair.Key + "}", invoiceInfo.Payed.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{balance-output" + invoiceInfoPair.Key + "}", invoiceInfo.BalanceOutput.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{total-area" + invoiceInfoPair.Key + "}", invoiceInfo.TotalArea.ToString("N1", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{total-area-n2" + invoiceInfoPair.Key + "}", invoiceInfo.TotalArea.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{prescribed" + invoiceInfoPair.Key + "}", invoiceInfo.Prescribed.ToString());
+                content = content.Replace("{tariff" + invoiceInfoPair.Key + "}", invoiceInfo.TotalArea == 0 ? "0" :
+                    Math.Round(invoiceInfo.ChargingTenancy / (decimal)invoiceInfo.TotalArea, 3).ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{total-charging" + invoiceInfoPair.Key + "}", (invoiceInfo.ChargingTenancy + invoiceInfo.RecalcTenancy).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{total-penalty" + invoiceInfoPair.Key + "}", (invoiceInfo.ChargingPenalty + invoiceInfo.RecalcPenalty).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{penalty-display" + invoiceInfoPair.Key + "}", (invoiceInfo.ChargingPenalty + invoiceInfo.RecalcPenalty) != 0 ? "table-row" : "none");
+            }
             return content;
         }
 

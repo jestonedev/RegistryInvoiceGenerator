@@ -2,7 +2,7 @@
   "profiles": {
     "RegistryInvoiceGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "--address=\"Видимская ул., д.2, кв.2\" --account=\"10169173\" --tenant=\"Дюпина Ольга Ивановна\" --on-date=\"01.01.2021\" --balance-input=\"891.26\" --charging=\"-445.63\" --payed=\"450.00\" --recalc=\"84.26\" --balance-output=\"-886.89\" --total-area=\"48.9\" --prescribed=\"3\" --tariff=\"7.390\" --email=\"ignvv@bratsk-city.ru\" --message=\"<p>Текст</p>\""
+      "commandLineArgs": "--address=\"Видимская ул., д.2, кв.2\" --account=\"10169173\" --tenant=\"Дюпина Ольга Ивановна\" --on-date=\"01.01.2021\" --balance-input=\"891.26\" --charging-tenancy=\"-445.63\" --charging-penalty=\"5.63\" --payed=\"450.00\" --recalc-tenancy=\"84.26\" --recalc-penalty=\"4.25\" --balance-output=\"-886.89\" --total-area=\"48.9\" --prescribed=\"3\" --email=\"ignvv@bratsk-city.ru\" --message=\"<p>Текст</p>\""
     }
   }
 }

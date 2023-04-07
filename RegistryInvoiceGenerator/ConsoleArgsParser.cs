@@ -7,14 +7,17 @@ namespace RegistryInvoiceGenerator
 {
     public class ConsoleArgsParser
     {
-        public InvoiceInfo ParseToInvoiceInfo(string[] args)
+        public InvoiceInfo ParseToInvoiceInfo(string[] args, string argsPostfix = "")
         {
             var invoiceInfo = new InvoiceInfo();
             foreach(var arg in args)
             {
                 var argParts = arg.Split("=");
                 if (argParts.Length != 2) continue;
-                switch(argParts[0])
+                var argName = argParts[0];
+                if (!argName.EndsWith(argsPostfix)) continue;
+                argName = argName.Substring(0, argName.Length - argsPostfix.Length);
+                switch (argName)
                 {
                     case "--address":
                         invoiceInfo.Address = argParts[1];
@@ -117,6 +120,7 @@ namespace RegistryInvoiceGenerator
                         break;
                 }
             }
+            if (invoiceInfo.Account == null) return null;
             return invoiceInfo;
         }
     }

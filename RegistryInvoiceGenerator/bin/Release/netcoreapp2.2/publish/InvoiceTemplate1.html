@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table.main-table, table.main-table td {
+            border: 1px solid black;
+        }
+
+        table.main-table .main-content-td {
+            border-right: 0px;
+        }
+
+        .main-content-td p {
+            margin: 0px 0;
+            margin-left: 5px;
+        }
+
+        table.money-table .money-td {
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        table.money-table .money-header, table.area-table .area-header {
+            padding-left: 5px;
+        }
+
+        table.money-table, table.money-table td, table.area-table, table.area-table td {
+            border: 0px;
+        }
+
+        table.area-table {
+            table-layout: fixed;
+        }
+
+        .main-content-td .account, .main-content-td .total-area {
+            margin-right: 20px;
+        }
+
+        table.service-table {
+            margin-top: 20pt;
+        }
+
+        table.main-table td.qr-td {
+            vertical-align: top;
+            border-left: 0px;
+        }
+
+        table.calc-center-table {
+            margin-top:20px;
+        }
+
+        .calc-center-td {
+            padding-left: 5px;
+        }
+
+        table.calc-center-table .calc-center-td, table.calc-center-table {
+            border: 0;
+        }
+
+        .qr-td {
+            padding-top: 8px;
+            padding-right: 8px;
+        }
+
+        .qr-td .qr {
+            margin-top: 2px;
+            margin-left: 2px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .invoice-header-td {
+            vertical-align: central;
+            padding-right: 7px;
+        }
+
+        .main-content-td {
+            padding: 10px 0 5px 5px;
+        }
+
+        body {
+            font-family: Arial;
+            font-size: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <table class="main-table">
+        <tr>
+            <td class="invoice-header-td">
+                <img src="./invoice-title.png" width="19" height="147" />
+            </td>
+            <td class="main-content-td">
+                <p>Получатель: <b>УФК по Иркутской области (КУМИ г.Братска)</b></p>
+                <p>г. Братск, Ленина просп., д.37, email: , тел.:349372 (по оплате), тел.:349390 (по начис.)</p>
+                <p>Режим работы: Пн.-Пт. с 9.00-17.00, обед 13.00-14.00, сб.,вс-выходной</p>
+                <p>Расчетный счет 03100643000000013400 ИНН 3803201800 БИК 012520101</p>
+                <p>Отд. Иркутск Банка России//УФК по Ирк.обл.г.Иркутск, к/с 40102810145370000026</p>
+                <p>Адрес: <b>{address}</b></p>
+                <p>Лиц. счет: <b class="account">{account}</b> ЕЛС ГИС ЖКХ:</p>
+                <p>Потребитель: <b>{tenant}</b></p>
+                <table class="money-table">
+                    <tr>
+                        <td class="money-header">Недоплата на {prev-date}г.</td>
+                        <td class="money-td">{balance-input}</td>
+                    </tr>
+                    <tr>
+                        <td class="money-header">Начислено</td>
+                        <td class="money-td">{charging}</td>
+                    </tr>
+                    <tr>
+                        <td class="money-header">Оплачено</td>
+                        <td class="money-td">{payed}</td>
+                    </tr>
+                    <tr>
+                        <td class="money-header"><b>К оплате за {date}г.</b></td>
+                        <td class="money-td"><b>{balance-output}</b></td>
+                    </tr>
+                </table>
+                <p>Площадь общая: <b class="total-area">{total-area}</b> количество проживающих: <b>{prescribed}</b> чел.</p>
+                <table class="area-table">
+                    <tr>
+                        <td class="area-header">Общая площадь ж.п.:</td>
+                        <td class="area-header">Площадь нежил. п.:</td>
+                        <td class="area-header">Площадь ОИ:</td>
+                        <td class="area-header">Площадь ОИ э/э:</td>
+                    </tr>
+                </table>
+                <table class="service-table">
+                    <tr><td>Вид услуги</td><td>Ед. изм.</td><td>Норматив</td><td>Объем/Кол-во</td><td>Тариф, руб.</td><td>Размер платы</td><td>Пере-расчет</td><td>Итог за тек. мес.</td></tr>
+                    <tr>
+                        <td>Плата за наем КБК 90111109044041000120</td>
+                        <td>кв.м.</td>
+                        <td></td>
+                        <td>{total-area-n2}</td>
+                        <td>{tariff}</td>
+                        <td>{charging-tenancy}</td>
+                        <td>{recalc-tenancy}</td>
+                        <td>{total-charging}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Итого</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{charging-tenancy}</b></td>
+                        <td><b>{recalc-tenancy}</b></td>
+                        <td><b>{total-charging}</b></td>
+                    </tr>
+                    <tr style="display:{penalty-display}">
+                        <td>Пени</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{charging-penalty}</td>
+                        <td>{recalc-penalty}</td>
+                        <td>{total-penalty}</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="qr-td">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="./{qr}" class="qr" width="175" height="175" />
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="calc-center-table">
+                    <tr>
+                        <td class="calc-center-td">
+                            <img src="./calc-center.png" width="63" height="168" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
