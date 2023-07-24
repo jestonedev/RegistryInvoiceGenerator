@@ -39,7 +39,8 @@
             table-layout: fixed;
         }
 
-        .main-content-td .account, .main-content-td .total-area {
+        .main-content-td .account, .main-content-td .total-area, .main-content-td .giszkh-account,
+		.main-content-td .tenant {
             margin-right: 20px;
         }
 
@@ -53,13 +54,13 @@
         }
 
         table.calc-center-table {
-            margin-top:20px;
+            margin-top:10pt;
+			margin-bottom:10pt;
         }
 
         .calc-center-td {
             padding-left: 5px;
 			text-align: center;
-			padding-top: 10pt;
         }
 
         table.calc-center-table .calc-center-td, table.calc-center-table {
@@ -72,10 +73,7 @@
         }
 
         .qr-td .qr {
-            margin-top: 2px;
-            margin-left: 2px;
-            margin-right: 20px;
-            margin-bottom: 20px;
+            margin-top: 2pt;
         }
 
         .invoice-header-td {
@@ -89,7 +87,7 @@
 
         body {
             font-family: Arial;
-            font-size: 15px;
+            font-size: 11pt;
         }
         
     </style>
@@ -102,13 +100,13 @@
             </td>
             <td class="main-content-td">
                 <p>Получатель: <b>УФК по Иркутской области (КУМИ г.Братска)</b></p>
-                <p>г. Братск, Ленина просп., д.37, email: , тел.: 349393, 349372 (по оплате), тел.:349390 (по начис.)</p>
+                <p>г. Братск, Ленина просп., д.37, email: , тел.:349393, 349372 (по оплате), тел.:349390 (по начис.)</p>
                 <p>Режим работы: Пн.-Пт. с 9.00-17.00, обед 13.00-14.00, сб.,вс-выходной</p>
-                <p>Казначейский счет 03100643000000013400 ИНН 3803201800 БИК 012520101 КПП 380401001</p>
+                <p>Казн. счет 03100643000000013400 ИНН 3803201800 КПП 380401001 БИК 012520101</p>
                 <p>ОТДЕЛЕНИЕ ИРКУТСКА БАНКА РОССИИ//УФК ПО ИРКУТСКОЙ ОБЛАСТИ г Иркутск</p>
                 <p>Адрес: <b>{address}</b></p>
-                <p>Лиц. счет: <b class="account">{account}</b> ЕЛС ГИС ЖКХ:&nbsp;&nbsp;&nbsp; Единый казначейский счет: 40102810145370000026</p>
-                <p>Потребитель: <b>{tenant}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;КБК: 901 1 11 09044 04 1000 120</p>
+                <p>Лиц. счет: <b class="account">{account}</b> ЕЛС ГИС ЖКХ:<b class="giszkh-account"></b> Ед. каз. счет: 40102810145370000026</p>
+                <p>Потребитель: <b class="tenant">{tenant}</b>КБК: 901 1 11 09044 04 1000 120</p>
                 <table class="money-table">
                     <tr>
                         <td class="money-header">Недоплата на {prev-date}г.</td>
@@ -134,7 +132,7 @@
                         <td>Плата за наем</td>
                         <td>кв.м.</td>
                         <td></td>
-                        <td>{total-area-2}</td>
+                        <td>{total-area-n2}</td>
                         <td>{tariff}</td>
                         <td>{charging-tenancy}</td>
                         <td>{recalc-tenancy}</td>
