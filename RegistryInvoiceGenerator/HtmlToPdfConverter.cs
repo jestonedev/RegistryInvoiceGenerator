@@ -34,6 +34,7 @@ namespace RegistryInvoiceGenerator
                 content = content.Replace("{tenant" + invoiceInfoPair.Key + "}", invoiceInfo.Tenant);
                 content = content.Replace("{prev-date" + invoiceInfoPair.Key + "}", new DateTime(invoiceInfo.OnDate.Year, invoiceInfo.OnDate.Month, 1).AddDays(-1).ToString("dd.MM.yyyy"));
                 content = content.Replace("{date" + invoiceInfoPair.Key + "}", invoiceInfo.OnDate.ToString("MMMM yyyy", CultureInfo.GetCultureInfo("ru-RU")).ToLower());
+                content = content.Replace("{on-date-payments" + invoiceInfoPair.Key + "}", new DateTime(invoiceInfo.OnDate.Year, invoiceInfo.OnDate.Month, 20).ToString("dd.MM.yyyy"));
                 content = content.Replace("{balance-input" + invoiceInfoPair.Key + "}", invoiceInfo.BalanceInput.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
                 content = content.Replace("{charging" + invoiceInfoPair.Key + "}", invoiceInfo.Charging.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
                 content = content.Replace("{charging-tenancy" + invoiceInfoPair.Key + "}", invoiceInfo.ChargingTenancy.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));

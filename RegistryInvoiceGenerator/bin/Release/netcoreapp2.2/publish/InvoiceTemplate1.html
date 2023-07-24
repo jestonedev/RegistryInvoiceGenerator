@@ -58,6 +58,8 @@
 
         .calc-center-td {
             padding-left: 5px;
+			text-align: center;
+			padding-top: 10pt;
         }
 
         table.calc-center-table .calc-center-td, table.calc-center-table {
@@ -100,13 +102,13 @@
             </td>
             <td class="main-content-td">
                 <p>Получатель: <b>УФК по Иркутской области (КУМИ г.Братска)</b></p>
-                <p>г. Братск, Ленина просп., д.37, email: , тел.:349372 (по оплате), тел.:349390 (по начис.)</p>
+                <p>г. Братск, Ленина просп., д.37, email: , тел.: 349393, 349372 (по оплате), тел.:349390 (по начис.)</p>
                 <p>Режим работы: Пн.-Пт. с 9.00-17.00, обед 13.00-14.00, сб.,вс-выходной</p>
-                <p>Расчетный счет 03100643000000013400 ИНН 3803201800 БИК 012520101</p>
-                <p>Отд. Иркутск Банка России//УФК по Ирк.обл.г.Иркутск, к/с 40102810145370000026</p>
+                <p>Казначейский счет 03100643000000013400 ИНН 3803201800 БИК 012520101 КПП 380401001</p>
+                <p>ОТДЕЛЕНИЕ ИРКУТСКА БАНКА РОССИИ//УФК ПО ИРКУТСКОЙ ОБЛАСТИ г Иркутск</p>
                 <p>Адрес: <b>{address}</b></p>
-                <p>Лиц. счет: <b class="account">{account}</b> ЕЛС ГИС ЖКХ:</p>
-                <p>Потребитель: <b>{tenant}</b></p>
+                <p>Лиц. счет: <b class="account">{account}</b> ЕЛС ГИС ЖКХ:&nbsp;&nbsp;&nbsp; Единый казначейский счет: 40102810145370000026</p>
+                <p>Потребитель: <b>{tenant}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;КБК: 901 1 11 09044 04 1000 120</p>
                 <table class="money-table">
                     <tr>
                         <td class="money-header">Недоплата на {prev-date}г.</td>
@@ -126,21 +128,13 @@
                     </tr>
                 </table>
                 <p>Площадь общая: <b class="total-area">{total-area}</b> количество проживающих: <b>{prescribed}</b> чел.</p>
-                <table class="area-table">
-                    <tr>
-                        <td class="area-header">Общая площадь ж.п.:</td>
-                        <td class="area-header">Площадь нежил. п.:</td>
-                        <td class="area-header">Площадь ОИ:</td>
-                        <td class="area-header">Площадь ОИ э/э:</td>
-                    </tr>
-                </table>
                 <table class="service-table">
                     <tr><td>Вид услуги</td><td>Ед. изм.</td><td>Норматив</td><td>Объем/Кол-во</td><td>Тариф, руб.</td><td>Размер платы</td><td>Пере-расчет</td><td>Итог за тек. мес.</td></tr>
                     <tr>
-                        <td>Плата за наем КБК 90111109044041000120</td>
+                        <td>Плата за наем</td>
                         <td>кв.м.</td>
                         <td></td>
-                        <td>{total-area-n2}</td>
+                        <td>{total-area-2}</td>
                         <td>{tariff}</td>
                         <td>{charging-tenancy}</td>
                         <td>{recalc-tenancy}</td>
@@ -180,7 +174,12 @@
                 <table class="calc-center-table">
                     <tr>
                         <td class="calc-center-td">
-                            <img src="./calc-center.png" width="63" height="168" />
+							Внимание!<br>
+							В счете-извещении<br>
+							учтены платежи,<br>
+							поступившие по<br>
+							состоянию на<br>
+							{on-date-payments}
                         </td>
                     </tr>
                 </table>
