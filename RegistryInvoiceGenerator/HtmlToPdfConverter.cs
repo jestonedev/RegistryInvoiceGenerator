@@ -31,6 +31,7 @@ namespace RegistryInvoiceGenerator
                 content = content.Replace("{qr"+invoiceInfoPair.Key+"}", qrFileName);
                 content = content.Replace("{address" + invoiceInfoPair.Key + "}", invoiceInfo.Address);
                 content = content.Replace("{account" + invoiceInfoPair.Key + "}", invoiceInfo.Account);
+                content = content.Replace("{account-gis-zkh" + invoiceInfoPair.Key + "}", invoiceInfo.AccountGisZkh);
                 content = content.Replace("{tenant" + invoiceInfoPair.Key + "}", invoiceInfo.Tenant);
                 content = content.Replace("{prev-date" + invoiceInfoPair.Key + "}", new DateTime(invoiceInfo.OnDate.Year, invoiceInfo.OnDate.Month, 1).AddDays(-1).ToString("dd.MM.yyyy"));
                 content = content.Replace("{date" + invoiceInfoPair.Key + "}", invoiceInfo.OnDate.ToString("MMMM yyyy", CultureInfo.GetCultureInfo("ru-RU")).ToLower());

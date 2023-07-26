@@ -25,6 +25,9 @@ namespace RegistryInvoiceGenerator
                     case "--account":
                         invoiceInfo.Account = argParts[1];
                         break;
+                    case "--account-gis-zkh":
+                        invoiceInfo.AccountGisZkh = argParts[1];
+                        break;
                     case "--tenant":
                         invoiceInfo.Tenant = argParts[1];
                         break;
