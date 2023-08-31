@@ -127,14 +127,15 @@
                     </tr>
                 </table>
                 <p>Срок оплаты по квитанции до <b>{payment-date}</b> (статья 155 ЖФ РФ)</p>
-				<table class="service-table">
+                <table class="service-table">
                     <tr>
-						<td>Вид услуги</td>
-						<td>Общая площадь, кв.м</td>
-						<td>Тариф, руб.</td>
-						<td>Размер платы</td>
-						<td>Перерасчет</td>
-						<td>Итог за тек. мес.</td></tr>
+                        <td>Вид услуги</td>
+                        <td>Общая площадь, кв.м</td>
+                        <td>Тариф, руб.</td>
+                        <td>Размер платы</td>
+                        <td>Перерасчет</td>
+                        <td>Итог за тек. мес.</td>
+                    </tr>
                     <tr>
                         <td>Плата за наем</td>
                         <td>{total-area-n2}</td>
@@ -143,14 +144,6 @@
                         <td>{recalc-tenancy}</td>
                         <td>{total-charging}</td>
                     </tr>
-                    <tr>
-                        <td><b>Итого</b></td>
-                        <td></td>
-                        <td></td>
-                        <td><b>{charging-tenancy}</b></td>
-                        <td><b>{recalc-tenancy}</b></td>
-                        <td><b>{total-charging}</b></td>
-                    </tr>
                     <tr style="display:{penalty-display}">
                         <td>Пени</td>
                         <td></td>
@@ -158,6 +151,14 @@
                         <td>{charging-penalty}</td>
                         <td>{recalc-penalty}</td>
                         <td>{total-penalty}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Итого</b></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{total-for-charge}</b></td>
+                        <td><b>{total-for-recalc}</b></td>
+                        <td><b>{total-for-charging}</b></td>
                     </tr>
                 </table>
             </td>
