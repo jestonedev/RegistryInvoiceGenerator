@@ -24,7 +24,7 @@
 
         table.money-table .money-td {
             text-align: right;
-            padding-right: 30px;
+            padding-right: 172pt;
         }
 
         table.money-table .money-header, table.area-table .area-header {
@@ -100,7 +100,7 @@
             </td>
             <td class="main-content-td">
                 <p>Получатель: <b>УФК по Иркутской области (КУМИ г.Братска)</b></p>
-                <p>г. Братск, Ленина просп., д.37, email: , тел.:349393, 349372 (по оплате), тел.:349390 (по начис.)</p>
+                <p>г. Братск, Ленина просп., д.37, email: , тел.:349393, 349372 (по оплате), тел.:349632 (по начис.)</p>
                 <p>Режим работы: Пн.-Пт. с 9.00-17.00, обед 13.00-14.00, сб.,вс-выходной</p>
                 <p>Казн. счет 03100643000000013400 ИНН 3803201800 КПП 380401001 БИК 012520101</p>
                 <p>ОТДЕЛЕНИЕ ИРКУТСКА БАНКА РОССИИ//УФК ПО ИРКУТСКОЙ ОБЛАСТИ г Иркутск</p>
@@ -110,7 +110,7 @@
                 <p>Потребитель: <b class="tenant">{tenant}</b></p>
                 <table class="money-table">
                     <tr>
-                        <td class="money-header">Недоплата на {prev-date}г.</td>
+                        <td class="money-header">Недоплата на {prev-date}</td>
                         <td class="money-td">{balance-input}</td>
                     </tr>
                     <tr>
@@ -122,42 +122,43 @@
                         <td class="money-td">{payed}</td>
                     </tr>
                     <tr>
-                        <td class="money-header"><b>К оплате за {date}г.</b></td>
+                        <td class="money-header"><b>К оплате за {date}</b></td>
                         <td class="money-td"><b>{balance-output}</b></td>
                     </tr>
                 </table>
-                <p>Площадь общая: <b class="total-area">{total-area}</b> количество проживающих: <b>{prescribed}</b> чел.</p>
+                <p>Срок оплаты по квитанции до <b>{payment-date}</b> (статья 155 ЖФ РФ)</p>
                 <table class="service-table">
-                    <tr><td>Вид услуги</td><td>Ед. изм.</td><td>Норматив</td><td>Объем/Кол-во</td><td>Тариф, руб.</td><td>Размер платы</td><td>Пере-расчет</td><td>Итог за тек. мес.</td></tr>
+                    <tr>
+                        <td>Вид услуги</td>
+                        <td>Общая площадь, кв.м</td>
+                        <td>Тариф, руб.</td>
+                        <td>Размер платы</td>
+                        <td>Перерасчет</td>
+                        <td>Итог за тек. мес.</td>
+                    </tr>
                     <tr>
                         <td>Плата за наем</td>
-                        <td>кв.м.</td>
-                        <td></td>
                         <td>{total-area-n2}</td>
                         <td>{tariff}</td>
                         <td>{charging-tenancy}</td>
                         <td>{recalc-tenancy}</td>
                         <td>{total-charging}</td>
                     </tr>
-                    <tr>
-                        <td><b>Итого</b></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><b>{charging-tenancy}</b></td>
-                        <td><b>{recalc-tenancy}</b></td>
-                        <td><b>{total-charging}</b></td>
-                    </tr>
                     <tr style="display:{penalty-display}">
                         <td>Пени</td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td>{charging-penalty}</td>
                         <td>{recalc-penalty}</td>
                         <td>{total-penalty}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Итого</b></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{total-for-charge}</b></td>
+                        <td><b>{total-for-recalc}</b></td>
+                        <td><b>{total-for-charging}</b></td>
                     </tr>
                 </table>
             </td>
