@@ -105,6 +105,13 @@ namespace RegistryInvoiceGenerator
                         }
                         invoiceInfo.TotalArea = totalArea;
                         break;
+                    case "--tariff":
+                        if (!float.TryParse(argParts[1], NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out float tariff))
+                        {
+                            totalArea = 0;
+                        }
+                        invoiceInfo.Tariff = tariff;
+                        break;
                     case "--prescribed":
                         if (!int.TryParse(argParts[1], out int prescribed))
                         {

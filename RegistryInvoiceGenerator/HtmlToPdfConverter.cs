@@ -48,8 +48,7 @@ namespace RegistryInvoiceGenerator
                 content = content.Replace("{total-area" + invoiceInfoPair.Key + "}", invoiceInfo.TotalArea.ToString("N1", CultureInfo.GetCultureInfo("ru-RU")));
                 content = content.Replace("{total-area-n2" + invoiceInfoPair.Key + "}", invoiceInfo.TotalArea.ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
                 content = content.Replace("{prescribed" + invoiceInfoPair.Key + "}", invoiceInfo.Prescribed.ToString());
-                content = content.Replace("{tariff" + invoiceInfoPair.Key + "}", invoiceInfo.TotalArea == 0 ? "0" :
-                    Math.Round(invoiceInfo.ChargingTenancy / (decimal)invoiceInfo.TotalArea, 3).ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
+                content = content.Replace("{tariff" + invoiceInfoPair.Key + "}", invoiceInfo.Tariff.ToString("N3", CultureInfo.GetCultureInfo("ru-RU")));
                 content = content.Replace("{total-charging" + invoiceInfoPair.Key + "}", (invoiceInfo.ChargingTenancy + invoiceInfo.RecalcTenancy).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
                 content = content.Replace("{total-penalty" + invoiceInfoPair.Key + "}", (invoiceInfo.ChargingPenalty + invoiceInfo.RecalcPenalty).ToString("N2", CultureInfo.GetCultureInfo("ru-RU")));
 

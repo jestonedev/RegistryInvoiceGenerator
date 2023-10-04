@@ -16,6 +16,7 @@ namespace RegistryInvoiceGenerator
         public decimal Payed { get; set; }
         public decimal BalanceOutput { get; set; }
         public float TotalArea { get; set; }
+        public float Tariff { get; set; }
         public int Prescribed { get; set; }
         public string Email { get; set; }
         public string MoveToFileName { get; set; }
