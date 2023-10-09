@@ -22,6 +22,9 @@ namespace RegistryInvoiceGenerator
                     case "--address":
                         invoiceInfo.Address = argParts[1];
                         break;
+                    case "--post-index":
+                        invoiceInfo.PostIndex = argParts[1];
+                        break;
                     case "--account":
                         invoiceInfo.Account = argParts[1];
                         break;

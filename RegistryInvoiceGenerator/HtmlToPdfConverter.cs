@@ -29,7 +29,7 @@ namespace RegistryInvoiceGenerator
                 var invoiceInfo = invoiceInfoPair.Value.Item1;
                 var qrFileName = invoiceInfoPair.Value.Item2;
                 content = content.Replace("{qr"+invoiceInfoPair.Key+"}", qrFileName);
-                content = content.Replace("{address" + invoiceInfoPair.Key + "}", invoiceInfo.Address);
+                content = content.Replace("{address" + invoiceInfoPair.Key + "}", invoiceInfo.Address+(string.IsNullOrEmpty(invoiceInfo.PostIndex) ? "" : ", "+invoiceInfo.PostIndex));
                 content = content.Replace("{account" + invoiceInfoPair.Key + "}", invoiceInfo.Account);
                 content = content.Replace("{account-gis-zkh" + invoiceInfoPair.Key + "}", invoiceInfo.AccountGisZkh);
                 content = content.Replace("{tenant" + invoiceInfoPair.Key + "}", invoiceInfo.Tenant);
